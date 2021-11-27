@@ -23,12 +23,15 @@ i2c_sda = Pin(4, Pin.OUT, Pin.PULL_UP)
 i2c = I2C(scl=i2c_scl, sda=i2c_sda)
 # Create the display object
 oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)
+
+text="HELLO FROM PYTHON!!!"
 oled.fill(0)
-oled.text('HELLO FROM PYTHON!!!', 0, 0)
-oled.text('HELLO FROM PYTHON!!!', 0, 10)
-oled.text('HELLO FROM PYTHON!!!', 0, 20)
-oled.text('HELLO FROM PYTHON!!!', 0, 30)
-oled.text('HELLO FROM PYTHON!!!', 0, 40)
-oled.text('HELLO FROM PYTHON!!!', 0, 50)
-       
+oled.text('', 0, 0)
+oled.text(text, 0, 10)
+oled.text(text, 0, 20)
+oled.text(text, 0, 30)
+oled.text(text, 0, 40)
+oled.text(text, 0, 50)
+oled.show()
+time.sleep(5)
 oled.show()
