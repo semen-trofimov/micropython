@@ -26,12 +26,8 @@ oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)
 
 text="HELLO FROM PYTHON!!!"
 oled.fill(0)
-oled.text('', 0, 0)
 oled.text(text, 0, 10)
-oled.text(text, 0, 20)
-oled.text(text, 0, 30)
-oled.text(text, 0, 40)
-oled.text(text, 0, 50)
 oled.show()
 time.sleep(5)
+oled.invert(1) 
 oled.show()
