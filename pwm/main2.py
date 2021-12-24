@@ -1,8 +1,12 @@
 import machine
+import time, math
 
-p17 = machine.Pin(17)
+pwm = machine.PWM(machine.Pin(25), freq=1000)
 
-pwm = machine.PWM(p17)
-
-pwm.freq(8000)
-pwm.duty(1)
+while True:
+    for i in range(1024):
+        pwm.duty(i)
+        time.sleep(0.001)
+    for i in range(1023, -1, -1):
+        pwm.duty(i)
+        time.sleep(0.001)
