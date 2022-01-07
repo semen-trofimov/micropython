@@ -1,10 +1,9 @@
-from machine import UART
+from machine import Pin, UART
 from time import sleep
-uart = UART(2, 9600)       # init with given baudrate
-uart.init(9600, bits=8, parity=None, stop=1) # init with given parameters
 
-sleep(30)
+uart = UART(2, 115200)
+uart.init (115200, bits=8, parity=None, stop=1)
 
 while True:
-    uart.write('abc')   # write the 3 characters
+    uart.write('hello')
     sleep(1)

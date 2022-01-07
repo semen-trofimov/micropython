@@ -20,7 +20,7 @@ tm.write([0b00111001, 0b00111111, 0b00111111, 0b00111000])
 sleep(2)
 
 # show "HELP"
-tm.show('help')
+tm.show('LOvE')
 sleep(2)
 
 # display "dEAd", "bEEF"
