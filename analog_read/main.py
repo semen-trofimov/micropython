@@ -3,10 +3,10 @@
 from machine import Pin, ADC
 from time import sleep
 
-pot = ADC(Pin(35))
-pot.atten(ADC.ATTN_11DB)       #Full range: 3.3v
-
+pot = ADC(Pin(34))       #Full range: 3.3v
+pot.atten(ADC.WIDTH_12BIT)
 while True:
     pot_value = pot.read()
-    print(pot_value)
+    val = pot_value/40
+    print(val)
     sleep(0.1)
