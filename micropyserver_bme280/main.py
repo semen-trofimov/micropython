@@ -4,12 +4,11 @@ import esp
 import network
 from time import sleep
 import BME280
+import json
 
 ''' Код подключения к WiFi '''
 wlan_id = "ananas"
 wlan_pass = "t9indigo"
-i2c = I2C(scl=Pin(22), sda=Pin(21), freq=10000)
-
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 if wlan.isconnected() == False:
@@ -17,6 +16,18 @@ if wlan.isconnected() == False:
     while wlan.isconnected() == False:
         sleep(1)
 print('Device IP:', wlan.ifconfig()[0])
+
+def show_data(request):
+    i2c = I2C(scl=Pin(22), sda=Pin(21), freq=10000)
+    bme = BME280.BME280(i2c=i2c)
+    temp = bme.temperature
+    hum = bme.humidity
+    pres = bme.pressure
+    # data = {"temperature": temp, "humidity": hum, "pressure": pres}
+    # json_str = json.dumps(data)
+    server.send("TEMPERATURE: " + temp + "\n")
+    server.send("HUMIDITY: " + hum + "\n")
+    server.send("PRESSURE: " + pres + "\n")
 
 def do_on2(request):
     pin.value(1)
@@ -27,9 +38,6 @@ def do_off2(request):
     server.send("LED OFF!")
 
 pin = Pin(2, Pin.OUT)
-
-def temp(request):
-    server.send(bme.temperature)
 
 def show_message(request):
     ''' request handler '''
@@ -50,6 +58,6 @@ server.add_route("/semen", show_message2)
 server.add_route("/yla", show_message3)
 server.add_route("/pin2on", do_on2)
 server.add_route("/pin2off", do_off2)
-server.add_route("/temp", temp)
+server.add_route("/data", show_data)
 ''' start server '''
 server.start()
