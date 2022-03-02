@@ -1,12 +1,13 @@
-# Complete project details at https://RandomNerdTutorials.com
+from machine import Pin, ADC, PWM          #importing Pin, ADC and PWM classes
+from time import sleep                                 #importing sleep class
 
-from machine import Pin, ADC
-from time import sleep
+led=PWM(Pin(2), 5000)             #GPIO14 set as pin and 5000Hz as frequency
 
-pot = ADC(Pin(34))       #Full range: 3.3v
-pot.atten(ADC.WIDTH_12BIT)
+potentiometer=ADC(Pin(34))             #creating potentiometer object
+potentiometer.width(ADC.WIDTH_12BIT)   #setting ADC resolution to 10 bit
+#potentiometer.atten(ADC.ATTEN_11DB)         #3.3V full range of voltage
 while True:
-    pot_value = pot.read()
-    val = pot_value/40
-    print(val)
+    potentiometer_value=potentiometer.read()           #reading analog pin
+    print(potentiometer_value)
+    led.duty(potentiometer_value)             #setting duty cycle value as that of the potentiometer value
     sleep(0.1)
