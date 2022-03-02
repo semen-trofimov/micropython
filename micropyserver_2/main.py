@@ -16,11 +16,11 @@ if wlan.isconnected() == False:
         sleep(1)
 print('Device IP:', wlan.ifconfig()[0])
 
-def do_on(request):
+def do_on2(request):
     pin.value(1)
     server.send(" LED ON!")
 
-def do_off(request):
+def do_off2(request):
     pin.value(0)
     server.send("LED OFF!")
 
@@ -43,7 +43,7 @@ server = MicroPyServer()
 server.add_route("/", show_message)
 server.add_route("/semen", show_message2)
 server.add_route("/yla", show_message3)
-server.add_route("/on", do_on)
-server.add_route("/off", do_off)
+server.add_route("/pin2on", do_on2)
+server.add_route("/pin2off", do_off2)
 ''' start server '''
 server.start()
