@@ -23,11 +23,12 @@ def show_data(request):
     temp = bme.temperature
     hum = bme.humidity
     pres = bme.pressure
-    # data = {"temperature": temp, "humidity": hum, "pressure": pres}
-    # json_str = json.dumps(data)
-    server.send("TEMPERATURE: " + temp + "\n")
-    server.send("HUMIDITY: " + hum + "\n")
-    server.send("PRESSURE: " + pres + "\n")
+    data = {temp, hum, pres}
+    server.send(data=json.dumps(data))
+    
+    # server.send("TEMPERATURE: " + temp + "\n")
+    # server.send("HUMIDITY: " + hum + "\n")
+    # server.send("PRESSURE: " + pres + "\n")
 
 def do_on2(request):
     pin.value(1)
@@ -47,15 +48,11 @@ def show_message2(request):
     ''' request handler '''
     server.send("HELLO SEMEN!")
 
-def show_message3(request):
-    ''' request handler '''
-    server.send("HELLO YOULIA! I LOVE YOU!!! I LOVE YOU!!! I LOVE YOU!!! I LOVE YOU!!! I LOVE YOU!!! I LOVE YOU!!!")
 
 server = MicroPyServer()
 ''' add request handler '''
 server.add_route("/", show_message)
 server.add_route("/semen", show_message2)
-server.add_route("/yla", show_message3)
 server.add_route("/pin2on", do_on2)
 server.add_route("/pin2off", do_off2)
 server.add_route("/data", show_data)
